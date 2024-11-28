@@ -1,23 +1,33 @@
-import { headerActions } from '../store/header';
-import './style/header.css';
-import { useDispatch } from 'react-redux';
-const Header  = (props) => {
-    const dispatch = useDispatch();
+import "./style/Header.css";
+import { useSelector, useDispatch } from "react-redux";
+import { authActions } from "../store/auth";
 
-    const handleToggle = () => {
-      dispatch(headerActions.toggle());
-    }
+const Header = () => {
+  const dispatch = useDispatch();
+  // const isAuth = useSelector((state) => state.auth.isauthenticated);
 
-    return(
-        <>
-        <div className="header">
-          <h1>Redux</h1>  
-          <button onClick={handleToggle}>My Cart <span>1</span></button>
-         
-        </div>
-        </>
-    )
+  const logoutHandler = () => {
+    dispatch(authActions.logout());
+  };
 
+  return (
+    <header className="head">
+      <h1>Redux Auth</h1>
+      <nav>
+        <ul>
+          <li>
+            <a href="/">My Products</a>
+          </li>
+          <li>
+            <a href="/">My Sales</a>
+          </li>
+          <li>
+            <button onClick={logoutHandler}>Logout</button>
+          </li>
+        </ul>
+      </nav>
+    </header>
+  );
+};
 
-}
-export default Header
+export default Header;
